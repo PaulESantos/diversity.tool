@@ -3,3 +3,7 @@
 export(as_distdf)
 export(rankabund_df)
 export(rankabund_plot)
+export(specaccumplot)
+importFrom(magrittr,"%>%")
+importFrom(vegan,decostand)
+importFrom(vegan,specaccum)
