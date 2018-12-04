@@ -30,7 +30,7 @@ rankabund_plot <- function(comm, method = "abundance"){
     panel.background = ggplot2::element_rect(fill = "white", colour = NA),
     panel.border = ggplot2::element_rect(fill = NA, colour = "grey20"),
     panel.grid = ggplot2::element_line(colour = "grey92"),
-    panel.grid.minor = ggplot2::element_line(size = rel(0.5)),
+    panel.grid.minor = ggplot2::element_line(size = ggplot2::rel(0.5)),
     strip.background = ggplot2::element_rect(fill = "grey85", colour = "grey20"))
 
 

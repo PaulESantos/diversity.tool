@@ -1,4 +1,4 @@
-#' specaccumplot
+#' specaccum_plot
 #'
 #' @param comm Community data frame.
 #' @param method Species accumulation method (partial match).
@@ -18,6 +18,7 @@
 #' @importFrom vegan specaccum
 #' @importFrom magrittr %>%
 #' @import vegan
+#' @import tidyverse
 #'
 #' @examples
 #'
@@ -31,7 +32,7 @@ specaccumplot <- function(comm, method = "exact") {
 dplyr::data_frame(parcela = df$sites,
                     riqueza = df$richness,
                     des_sta = df$sd) %>%
-  ggplot2::ggplot(aes(parcela, riqueza))+
+  ggplot2::ggplot(ggplot2::aes(parcela, riqueza))+
   ggplot2::geom_line(linetype = 1, size = .5, color = "red") +
   ggplot2::geom_errorbar(aes(ymin = riqueza - des_sta, ymax = riqueza + des_sta),
                 width = 0, size = 1)+
