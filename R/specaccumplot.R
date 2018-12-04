@@ -7,12 +7,13 @@
 #'  expected (mean) species richness, "coleman" finds the expected
 #'  richness, and "rarefaction" finds the mean when accumulating
 #'  individuals instead of sites. Except for "collector" method.
+#' @return
+#' @export
 #' @seealso [specaccum()] from vegan.
 #' @importFrom vegan decostand
 #' @importFrom vegan specaccum
 #' @importFrom magrittr %>%
 #' @import vegan
-#' @export
 #' @examples
 #'
 #' require(vegan)

@@ -13,10 +13,10 @@
 #' @param x Object class dist.
 #'
 #' @return a tibble object.
+#' @export
 #' @import tidyverse
 #' @import tidyr
 #' @import tibble
-#' @export
 #'
 #' @examples
 #' require(vegan)

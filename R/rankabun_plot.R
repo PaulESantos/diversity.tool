@@ -4,8 +4,8 @@
 #' @param method Options are "abundance" and "logabun".
 #'
 #' @return A ggplot object.
-#' @import tidyverse
 #' @export
+#' @import tidyverse
 #'
 #' @examples
 #' require(vegan)
