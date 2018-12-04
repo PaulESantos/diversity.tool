@@ -11,7 +11,6 @@
 #' @importFrom vegan decostand
 #' @importFrom vegan specaccum
 #' @importFrom magrittr %>%
-#' @import magrittr
 #' @import vegan
 #' @examples
 #'
