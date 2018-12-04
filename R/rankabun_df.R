@@ -9,6 +9,7 @@
 #'
 #' @import tidyverse
 #' @import tidyr
+#' @export
 #'
 #' @examples
 #'

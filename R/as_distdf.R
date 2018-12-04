@@ -16,6 +16,7 @@
 #' @import tidyverse
 #' @import tidyr
 #' @import tibble
+#' @export
 #'
 #' @examples
 #' require(vegan)

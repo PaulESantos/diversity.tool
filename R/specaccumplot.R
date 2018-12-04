@@ -12,6 +12,7 @@
 #' @importFrom vegan specaccum
 #' @importFrom magrittr %>%
 #' @import vegan
+#' @export
 #' @examples
 #'
 #' require(vegan)
