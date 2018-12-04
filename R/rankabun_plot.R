@@ -4,7 +4,7 @@
 #' @param method Options are "abundance" and "logabun".
 #'
 #' @return A ggplot object.
-#' @export
+#' @import tidyverse
 #'
 #' @examples
 #' require(vegan)
@@ -23,12 +23,12 @@ rankabund_plot <- function(comm, method = "abundance"){
   df <-  rankabund_df(comm)
 
   themes <- ggplot2::theme(
-    text = element_text(face = "bold", size = 15),
-    panel.background = element_rect(fill = "white", colour = NA),
-    panel.border = element_rect(fill = NA, colour = "grey20"),
-    panel.grid = element_line(colour = "grey92"),
-    panel.grid.minor = element_line(size = rel(0.5)),
-    strip.background = element_rect(fill = "grey85", colour = "grey20"))
+    text = ggplot2::element_text(face = "bold", size = 15),
+    panel.background = ggplot2::element_rect(fill = "white", colour = NA),
+    panel.border = ggplot2::element_rect(fill = NA, colour = "grey20"),
+    panel.grid = ggplot2::element_line(colour = "grey92"),
+    panel.grid.minor = ggplot2::element_line(size = rel(0.5)),
+    strip.background = ggplot2::element_rect(fill = "grey85", colour = "grey20"))
 
 
   output <- df %>%

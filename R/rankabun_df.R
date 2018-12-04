@@ -7,8 +7,8 @@
 #'  "sites" the rank abundance indexes are
 #'          estimated for each row (plot, site).
 #'
-#' @return
-#' @export
+#' @import tidyverse
+#' @import tidyr
 #'
 #' @examples
 #'
