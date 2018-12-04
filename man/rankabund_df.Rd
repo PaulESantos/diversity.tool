@@ -14,6 +14,9 @@ rankabund_df(comm, group = "none")
 "sites" the rank abundance indexes are
         estimated for each row (plot, site).}
 }
+\value{
+
+}
 \description{
 Calculating rank-abundance curves data.
 }

@@ -16,6 +16,9 @@ specaccumplot(comm, method = "exact")
  richness, and "rarefaction" finds the mean when accumulating
  individuals instead of sites. Except for "collector" method.}
 }
+\value{
+
+}
 \description{
 specaccumplot
 }

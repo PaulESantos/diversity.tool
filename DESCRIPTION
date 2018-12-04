@@ -1,5 +1,5 @@
 Package: diversity.tool
-Title: Tools for biodiversity analysis.
+Title: Tools for biodiversity analysis
 Version: 0.0.0.1
 Authors@R: person("Paul Efren", "Santos Andrade", email = "paulefrens@gmail.com", role = c("aut", "cre"))
 Description: Some functions for helping the community  analysis  for an ecologist

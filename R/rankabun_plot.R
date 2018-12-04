@@ -4,7 +4,9 @@
 #' @param method Options are "abundance" and "logabun".
 #'
 #' @return A ggplot object.
+#'
 #' @export
+#'
 #' @import tidyverse
 #'
 #' @examples

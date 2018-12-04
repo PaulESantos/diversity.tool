@@ -1,13 +1,17 @@
 #' Rankabun: Rank abundance
 #' @description
 #'   Calculating rank-abundance curves data.
+#'
 #' @param comm Community data.
 #' @param group Index for changing the output:
 #'  "none" the default output.
 #'  "sites" the rank abundance indexes are
 #'          estimated for each row (plot, site).
+#'
 #' @return
+#'
 #' @export
+#'
 #' @import tidyverse
 #' @import tidyr
 #'
