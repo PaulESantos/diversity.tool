@@ -5,6 +5,7 @@
 #'
 #' @return A ggplot object.
 #' @import tidyverse
+#' @export
 #'
 #' @examples
 #' require(vegan)
