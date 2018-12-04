@@ -7,7 +7,14 @@
 specaccumplot(comm, method = "exact")
 }
 \arguments{
-\item{method}{Species accumulation method (partial match).  Use the same options as specaccum function from vegan package, "random" adds sites in random order, "exact" finds the expected (mean) species richness, "coleman" finds the expected richness, and "rarefaction" finds the mean when accumulating individuals instead of sites. Except for "collector" method.}
+\item{comm}{Community data frame.}
+
+\item{method}{Species accumulation method (partial match).
+ Use the same options as specaccum function from vegan package,
+"random" adds sites in random order, "exact" finds the
+ expected (mean) species richness, "coleman" finds the expected
+ richness, and "rarefaction" finds the mean when accumulating
+ individuals instead of sites. Except for "collector" method.}
 }
 \description{
 specaccumplot
@@ -20,5 +27,5 @@ specaccumplot(dune)
 
 }
 \seealso{
-specaccum
+[specaccum()] from vegan.
 }

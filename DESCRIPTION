@@ -1,10 +1,11 @@
 Package: diversity.tool
 Title: Tools for biodiversity analysis.
-Version: 0.0.0.9000
+Version: 0.0.0.1
 Authors@R: person("Paul Efren", "Santos Andrade", email = "paulefrens@gmail.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Description: Some functions for helping the community  analysis  for an ecologist
+URL: https://github.com/PaulESantos/diversity.tool
 Depends: R (>= 3.5.1)
-License: What license is it under?
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1

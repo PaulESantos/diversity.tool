@@ -1,15 +1,18 @@
-
 #' specaccumplot
 #'
-#' @param comm
-#' @param method Species accumulation method (partial match).  Use the same options as specaccum function from vegan package, "random" adds sites in random order, "exact" finds the expected (mean) species richness, "coleman" finds the expected richness, and "rarefaction" finds the mean when accumulating individuals instead of sites. Except for "collector" method.
-#'
-#' @return
-#' @export
-#' @seealso specaccum
+#' @param comm Community data frame.
+#' @param method Species accumulation method (partial match).
+#'  Use the same options as specaccum function from vegan package,
+#' "random" adds sites in random order, "exact" finds the
+#'  expected (mean) species richness, "coleman" finds the expected
+#'  richness, and "rarefaction" finds the mean when accumulating
+#'  individuals instead of sites. Except for "collector" method.
+#' @seealso [specaccum()] from vegan.
 #' @importFrom vegan decostand
 #' @importFrom vegan specaccum
 #' @importFrom magrittr %>%
+#' @import magrittr
+#' @import vegan
 #' @examples
 #'
 #' require(vegan)
