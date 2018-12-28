@@ -3,6 +3,7 @@
 export(as_tbldist)
 export(rankabund_df)
 export(rankabund_plot)
+export(rarecurve_plot)
 export(specaccum_plot)
 import(tibble)
 import(tidyr)
