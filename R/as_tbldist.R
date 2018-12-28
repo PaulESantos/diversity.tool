@@ -1,4 +1,4 @@
-#' as_distdf
+#' as_tbldist
 #'
 #' @description A function to coerce objects of class dist
 #' (mainly created as the output of different packages used
@@ -24,9 +24,9 @@
 #' require(vegan)
 #' data("dune")
 #' vegdist(dune) %>%
-#' dist_df()
+#' as_tbldist()
 #'
-as_distdf <- function (x)
+as_tbldist <- function (x)
 {
   first_col <- function(df, ..., var = "rowname") {
     stopifnot(is.data.frame(df))
@@ -44,7 +44,7 @@ as_distdf <- function (x)
     warning("x is  not a dist object.")
     return("as_distdf is not aplicable ")
   }
-  x <- dist(x)
+  #x <- dist(x)
   x <- as.matrix(x)
   x <- tibble::as_tibble(x)
   x
@@ -56,10 +56,10 @@ as_distdf <- function (x)
   x <- first_col(x, names(x))
   vars <- names(x)[names(x) != "rowname"]
   x %<>%
-    tidyr::gather_("x", "dist_index", vars, na.rm = TRUE) %>%
+    tidyr::gather_("x", "index", vars, na.rm = TRUE) %>%
     dplyr::rename_("y" = "rowname") %>%
-    dplyr::select(x, y, dist_index) %>%
-    dplyr::filter(dist_index != 0)
+    dplyr::select(x, y, index) %>%
+    dplyr::filter(index != 0)
   class(x) <- c("dist_df", "tbl_df", "tbl", "data.frame", class(x))
   return(x)
 }

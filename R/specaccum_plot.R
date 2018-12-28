@@ -26,7 +26,7 @@
 #' data(dune)
 #' specaccumplot(dune)
 #'
-specaccumplot <- function(comm, method = "exact") {
+specaccum_plot <- function(comm, method = "exact") {
 
   df <- vegan::specaccum(comm, method = method)
 dplyr::data_frame(parcela = df$sites,
