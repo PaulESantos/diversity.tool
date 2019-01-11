@@ -19,7 +19,8 @@ ivi_index(df, sp = "species", ab = "area_basal", group = "sub_plot")
 ivi : Importance Valor Index
 }
 \examples{
-
-data \%>\%
+require(diversity.tool)
+data("bci")
+bci \%>\%
 ivi(sp = "species", ab = "area_basal", group = "sub_plot")
 }

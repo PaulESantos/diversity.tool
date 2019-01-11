@@ -9,7 +9,8 @@
 #' @export
 #'
 #' @examples
-#'
+#' require(diversity.tool)
+#' data("bci")
 #' bci %>%
 #' ivi(sp = "species", ab = "area_basal", group = "sub_plot")
 
