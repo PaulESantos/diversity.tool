@@ -10,7 +10,7 @@
 #'
 #' @examples
 #'
-#' data %>%
+#' bci %>%
 #' ivi(sp = "species", ab = "area_basal", group = "sub_plot")
 
 ivi_index <- function(df, sp = "species", ab = "area_basal", group = "sub_plot"){
