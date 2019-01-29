@@ -38,7 +38,7 @@ rankabund_df <- function(comm, group = "none"){
   name <- rownames(comm)
   #all communities
   df <- comm %>%
-    dplyr::as_data_frame() %>%
+    dplyr::as_tibble() %>%
     dplyr::mutate(sites = name) %>%
     tidyr::gather(species, abundance, -sites)
 
@@ -51,7 +51,8 @@ rankabund_df <- function(comm, group = "none"){
       rank = seq(1, length(species)),
       proportion = (abun / sum(abun)) * 100,
       acumfreq = cumsum(proportion),
-      logabun = log10(abun)) %>%
+      logabun = log10(abun),
+      rel.abund = abun/sum(abun)) %>%
     dplyr::ungroup()
 
 
@@ -68,7 +69,8 @@ rankabund_df <- function(comm, group = "none"){
                rank = seq(1, length(sites)),
                proportion = (abundance / sum(abundance)) * 100,
                acumfreq = cumsum(proportion),
-               logabun = log10(abundance)) %>%
+               logabun = log10(abundance),
+               rel.abund = abundance / sum(abundance)) %>%
              dplyr::filter(proportion != 0) %>%
              dplyr::arrange(sites)) %>%
       dplyr::ungroup()
