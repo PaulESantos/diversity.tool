@@ -1,5 +1,7 @@
 #' comdf_to_tbl
 #'
+#' This function converts a community data.frame to a tidy tibble object.
+#'
 #' @param comm Community data, a matrix-like object.
 #' @param type Class of the name string for each site; "num" - numeric id or "char" - character string id.
 #'

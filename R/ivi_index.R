@@ -5,8 +5,11 @@
 #' @param ab Name of the variable (column) that contein basal area.
 #' @param group Name of the variable for the minimum unit sample.
 #'
+#'
+#' @importFrom dplyr group_by rowwise ungroup arrange summarise n_distinct mutate rename select
 #' @return
 #' @export
+#'
 #'
 #' @examples
 #' require(diversity.tool)
@@ -30,7 +33,7 @@ ivi_index <- function(df, sp = "species", ab = "area_basal", group = "sub_plot")
                   freq_rela = (n_splot/ sum(n_splot, na.rm = TRUE))*100,
                   dom_rela = (area_basal/sum(area_basal, na.rm = TRUE))*100) %>%
     dplyr::rowwise() %>%
-    dplyr:: mutate(ivi = (sum(dens_rela, freq_rela, dom_rela)/3)) %>%
+    dplyr::mutate(ivi = (sum(dens_rela, freq_rela, dom_rela)/3)) %>%
     dplyr::arrange(desc(ivi)) %>%
 
     dplyr::ungroup()

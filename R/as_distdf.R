@@ -17,10 +17,11 @@
 #'
 #' @export
 #'
-#' @import tidyverse
-#' @import tidyr
-#' @import tibble
-#' @import vegan
+#'
+#' @importFrom tidyr gather
+#' @importFrom dplyr as_tibble rename select
+#' @importFrom tibble has_name tibble
+#' @importFrom vegan dune
 #'
 #' @examples
 #' require(vegan)
@@ -50,13 +51,13 @@ as_distdf <- function (x, diagonal = NA, type = "wide")
     new_col <- tibble::tibble(...)
     names(new_col) <- var
     new_df <- c(new_col, df)
-    dplyr::as_data_frame(new_df)
+    dplyr::as_tibble(new_df)
   }
 
   x <- as.matrix(x)
   rownames(x) <- paste0("plot_", rownames(x))
   colnames(x) <- paste0("plot_", colnames(x))
-  x <- tibble::as_data_frame(x)
+  x <- tibble::as_tibble(x)
   if (ncol(x) != nrow(x)) {
     stop(
       "Input object x is not a square. ",
@@ -73,8 +74,8 @@ as_distdf <- function (x, diagonal = NA, type = "wide")
   {
     vars <- names(output)[names(output) != "rowname"]
     output2 <-  output %>%
-      tidyr::gather_("x", "index", vars, na.rm = TRUE) %>%
-      dplyr::rename_(y = "rowname") %>%
+      tidyr::gather("x", "index", vars, na.rm = TRUE) %>%
+      dplyr::rename(y = "rowname") %>%
       dplyr::select(x, y, index)
     return(output2)
 
