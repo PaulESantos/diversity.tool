@@ -22,4 +22,5 @@ require(vegan)
 data(dune)
 rankabund_plot(dune)
 rankabund_plot(dune, method ="logabun")
+rankabund_plot(dune, method ="rel.abund")
 }

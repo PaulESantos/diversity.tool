@@ -9,7 +9,7 @@
 #' @export
 #' @importFrom tibble rowid_to_column rownames_to_column
 #' @importFrom tidyr gather
-#' @importFrom dplyr as_tible rename
+#' @importFrom dplyr as_tibble rename
 #' @importFrom magrittr %>%
 #' @examples
 #' require(vegan)

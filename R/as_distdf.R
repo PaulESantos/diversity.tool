@@ -21,7 +21,6 @@
 #' @importFrom tidyr gather
 #' @importFrom dplyr as_tibble rename select
 #' @importFrom tibble has_name tibble
-#' @importFrom vegan dune
 #'
 #' @examples
 #' require(vegan)
