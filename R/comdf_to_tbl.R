@@ -1,4 +1,4 @@
-#' comdf_to_tbl
+#' commdf_to_tbl
 #'
 #' This function converts a community data.frame to a tidy tibble object.
 #'
@@ -15,8 +15,8 @@
 #' require(vegan)
 #' data("dune")
 #' dune %>%
-#' comdf_to_tbl()
-comdf_to_tbl <- function(comm, type = "num") {
+#' comm_to_tbl()
+comm_to_tbl <- function(comm, type = "num") {
   SPLIT <- c("num", "char")
   if (is.na(pmatch(type, SPLIT)) | pmatch(type, SPLIT) ==
       -1)
