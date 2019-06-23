@@ -3,11 +3,10 @@
 #' This function converts a community data.frame to a tidy tibble object.
 #'
 #' @param comm Community data, a matrix-like object.
-#' @param type Class of the name string for each site; "num" - numeric id or "char" - character string id.
 #'
 #' @return
 #' @export
-#' @importFrom tibble rowid_to_column rownames_to_column
+#' @importFrom tibble has_rownames
 #' @importFrom tidyr gather
 #' @importFrom dplyr as_tibble rename
 #' @importFrom magrittr %>%
@@ -16,26 +15,24 @@
 #' data("dune")
 #' dune %>%
 #' comm_to_tbl()
-comm_to_tbl <- function(comm, type = "num") {
-  SPLIT <- c("num", "char")
-  if (is.na(pmatch(type, SPLIT)) | pmatch(type, SPLIT) ==
-      -1)
-    stop("invalid format")
+comm_to_tbl <- function(comm){
 
-
-  if(type == "num"){
-    return(comm %>%
-             tibble::rowid_to_column() %>%
-             dplyr::as_tibble() %>%
-             tidyr::gather(species, abundance, -1) %>%
-             dplyr::rename(site = rowid))
+    if(class(comm) == "matrix" & tibble::has_rownames(comm) == FALSE){
+      comm %>%
+        dplyr::as_tibble(rownames = "row_name") %>%
+        tidyr::gather(species, abundance, -1) %>%
+        dplyr::rename(site = row_name)
+    }
+    else if(class(comm) == "data.frame" & tibble::has_rownames(comm) == TRUE)
+    {
+      comm %>%
+        dplyr::as_tibble(rownames = "row_name") %>%
+        tidyr::gather(species, abundance, -1) %>%
+        dplyr::rename(site = row_name)
+    }
+    else if(class(comm) == "data.frame" & tibble::has_rownames(comm) == FALSE)
+    {
+      comm %>%
+        tidyr::gather(speceis, abundance, -1)
+    }
   }
-  else (type == "char")
-  {
-    return(comm %>%
-             tibble::rownames_to_column() %>%
-             dplyr::as_tibble() %>%
-             tidyr::gather(species, abundance, -1) %>%
-             dplyr::rename(site = rowname))
-  }
-}
