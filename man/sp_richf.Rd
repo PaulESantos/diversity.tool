@@ -4,11 +4,22 @@
 \alias{sp_richf}
 \title{Species Richness}
 \usage{
-sp_richf(df, method = "comm")
+sp_richf(comm, method = "comm")
 }
 \arguments{
 \item{method}{"comm" number of unique species, "site" number of species by site, "freq" number of sites where the species are present.}
 }
+\value{
+
+}
 \description{
 Finds the number of species, by community and for each site. Also frequencies of species.
+}
+\examples{
+sp_richf(dune, method = "comm")
+sp_richf(dune, method = "site")
+sp_richf(dune, method = "freq")
+sp_richf(BCI, method = "comm")
+sp_richf(BCI, method = "site")
+sp_richf(BCI, method = "freq")
 }

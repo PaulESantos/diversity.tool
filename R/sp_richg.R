@@ -6,18 +6,41 @@
 #' @param factor name of the variable used for build a grouped community data.
 #'
 #' @return
-#' @export
 #'
+#' @importFrom dplyr as_tibble left_join rename group_by filter n_distinct summarise
+#'
+#' @importFrom tibble has_rownames
+#' @importFrom tidyr gather
+#' @importFrom tibble rownames_to_column as_tibble
 #' @examples
 #' require(dune)
 #' data("dune")
 #' data("dune.env")
 #' sp_richg(dune, dune.env, factor = "Management")
-sp_richg <- function(comm1,char, factor = "" ) {
-  y <- factor
-x <- comm1 %>%
-  tibble::rownames_to_column("plot") %>%
-  tibble::as_tibble()
+sp_richg <- function(comm,char, factor = "" ) {
+y <- factor
+
+if(class(comm) == "matrix" & tibble::has_rownames(comm) == FALSE){
+  comm <- comm %>%
+    dplyr::as_tibble(rownames = "plot") %>%
+    tidyr::gather(species, abundance, -1)
+}
+else if(class(comm) == "data.frame" & tibble::has_rownames(comm) == TRUE)
+{
+  comm <- comm %>%
+    dplyr::as_tibble(rownames = "plot") %>%
+    tidyr::gather(species, abundance, -1)
+}
+else if(class(comm) == "data.frame" & tibble::has_rownames(comm) == FALSE)
+{
+  comm <- comm %>%
+    tidyr::gather(species, abundance, -1)
+  colnames(comm)[1] <- "plot"
+}
+
+
+
+x <- comm
 xx <- char %>%
   tibble::rownames_to_column("plot") %>%
   tibble::as_tibble()

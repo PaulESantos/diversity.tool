@@ -4,14 +4,17 @@
 \alias{sp_richg}
 \title{Richness and frequency by treatment.}
 \usage{
-sp_richg(comm1, char, factor = "")
+sp_richg(comm, char, factor = "")
 }
 \arguments{
-\item{comm1}{community data matrix.}
-
 \item{char}{characteristic from the community.}
 
 \item{factor}{name of the variable used for build a grouped community data.}
+
+\item{comm1}{community data matrix.}
+}
+\value{
+
 }
 \description{
 The function returns a tibble: "n_plot" the frequency of grouped variable. "n_species" species richness of the grouped variable.

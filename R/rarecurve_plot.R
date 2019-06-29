@@ -2,10 +2,11 @@
 #'
 #' @description Function rarecurve_plot draws a rarefaction curve for each row of the input data.
 #' @param comm Community data a matrix
-#' @param facet.var Option for plot output, default is "none" and "sites".
+#' @param color Options  "int" and "id".
+#'
+#' @details color "int" display the intinsity based on species abundance, and "id" display unique colour for each site.
 #'
 #' @return
-#' @export
 #'
 #' @examples
 #' require(vegan)
@@ -13,13 +14,14 @@
 #' rarecurve_plot(dune)
 #' rarecurve_plot(dune, facet.var = "sites")
 #'
-rarecurve_plot <- function (comm, facet.var = "none")
+rarecurve_plot <- function (comm, color = "int" )
 {
-  SPLIT <- c("none","sites")
-  if (is.na(pmatch(facet.var, SPLIT)) | pmatch(facet.var,
-                                               SPLIT) == -1)
+
+  SPLIT <- c("int","id")
+  if (is.na(pmatch(color, SPLIT)) | pmatch(color,
+                                           SPLIT) == -1)
     stop("invalid facet variable")
-  facet.var <- match.arg(facet.var, SPLIT)
+  color <- match.arg(color, SPLIT)
 
   rare <- function(comm, step = 1, sample) {
     x <- as.matrix(comm)
@@ -42,60 +44,63 @@ rarecurve_plot <- function (comm, facet.var = "none")
     })
     return(out)
   }
-  meta <- data_frame(name = rownames(comm),
-                     sites = length(name))
   dat <- rare(comm)
+  dat
   output <- dat %>%
     reshape2::melt() %>%
-    dplyr::as_data_frame() %>%
+    dplyr::as_tibble() %>%
     dplyr::rename(species = "value", sites = "L1") %>%
     dplyr::mutate(sites1 = as.character(sites)) %>%
     dplyr::group_by(sites1) %>%
-    dplyr::mutate(size = seq(1,length(sites), 1)) %>%
-    ggplot2::ggplot(aes(size, species)) +
-    ggplot2::geom_line(aes(group = sites1), size = 1) +
-    ggplot2::theme_minimal() +
-    ggplot2::scale_y_continuous(breaks = seq(1, 1000, 10)) +
-    ggplot2::theme(legend.position = "bottom",
-                   strip.text.x = element_text(size = 18, face = "bold"),
-                   strip.background = element_rect(fill = "white"),
-                   text = element_text(face = "bold", size = 10),
-                   legend.text = element_text(face = "bold", size = 12)) +
-    ggplot2::labs(x = "Sample Size", y = "Species", color = "Sites") +
-    ggplot2::guides(color = guide_legend(ncol = 10)) +
-    directlabels::geom_dl(aes(label = sites1), color = "red",
-                          method = list("last.points"))
+    dplyr::mutate(size = seq(1,length(sites), 1))
+
+  last_point <- output %>%
+    dplyr::slice(length(sites1)) %>%
+    dplyr::ungroup() %>%
+    dplyr::arrange(sites)
 
 
-  if (facet.var == "none") {
-    return(output)
+  if (color == "int") {
+    return(output %>%
+             ggplot2::ggplot(aes(size, species, colour = species)) +
+             ggplot2::geom_line(aes(group = sites1), alpha = .5) +
+             ggplot2::theme_bw() +
+             ggplot2::scale_y_continuous(breaks = seq(1,
+                                                      max(output$species),
+                                                      2)) +
+             ggplot2::theme(legend.position = "none",
+                            panel.grid = element_blank())+
+             ggplot2::geom_text(data = last_point,
+                                aes(size+.2, species,
+                                    label = sites1,
+                                    colour = species),
+                                check_overlap = TRUE) +
+             ggplot2::labs(x = "Sample Size",
+                           y = "Species")
+    )
   }
-  else (facet.var == "sites")
+  else (color == "id")
   {
-    output <- dat %>%
-      reshape2::melt() %>%
-      dplyr::as_data_frame() %>%
-      dplyr::rename(species = "value", sites = "L1") %>%
-      dplyr::mutate(sites1 = as.character(sites)) %>%
-      dplyr::group_by(sites1) %>%
-      dplyr::mutate(size = seq(1,length(sites), 1)) %>%
-      ggplot2::ggplot(aes(size, species)) +
-      ggplot2::geom_line(aes(group = sites1), size = .8, color = "darkgrey") +
-      ggplot2::theme_bw() +
-      ggplot2::scale_y_continuous(breaks = seq(1, 1000, 10)) +
-      ggplot2::theme(legend.position = "bottom",
-                     strip.text.x = element_text(size = 12, face = "bold"),
-                     strip.background = element_rect(fill = "white"),
-                     text = element_text(face = "bold", size = 10),
-                     legend.text = element_text(face = "bold", size = 12),
-                     panel.grid = element_blank()) +
-      ggplot2::facet_wrap(.~sites, scales = "free")+
-      ggplot2::labs(x = "Sample Size", y = "Species", color = "Sites")+
-      ggplot2::theme(legend.position = "none",
-                     strip.text = element_text(size = 10 ),
-                     strip.background = element_rect(color = "grey"))
+    return(output %>%
+             dplyr::ungroup() %>%
+             ggplot2::ggplot(aes(size, species,
+                                 colour = sites1)) +
+             ggplot2::geom_line(aes(group = sites1), alpha = .5) +
+             ggplot2::theme_bw() +
+             ggplot2::scale_y_continuous(breaks = seq(1,
+                                                      max(output$species),
+                                                      2)) +
+             ggplot2::theme(legend.position = "none",
+                            panel.grid = element_blank())+
+             ggplot2::geom_text(data = last_point,
+                                aes(size+.2, species,
+                                    label = sites1,
+                                    colour = sites1),
+                                check_overlap = TRUE) +
+             ggplot2::labs(x = "Sample Size",
+                           y = "Species")
+    )
 
-    return(output)
   }
   class(output) <- c("gg", "ggplot")
   return(output)

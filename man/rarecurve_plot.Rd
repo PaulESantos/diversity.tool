@@ -4,15 +4,21 @@
 \alias{rarecurve_plot}
 \title{rarecurve_plot}
 \usage{
-rarecurve_plot(comm, facet.var = "none")
+rarecurve_plot(comm, color = "int")
 }
 \arguments{
 \item{comm}{Community data a matrix}
 
-\item{facet.var}{Option for plot output, default is "none" and "sites".}
+\item{color}{Options  "int" and "id".}
+}
+\value{
+
 }
 \description{
 Function rarecurve_plot draws a rarefaction curve for each row of the input data.
+}
+\details{
+color "int" display the intinsity based on species abundance, and "id" display unique colour for each site.
 }
 \examples{
 require(vegan)

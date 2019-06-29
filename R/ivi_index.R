@@ -7,8 +7,8 @@
 #'
 #'
 #' @importFrom dplyr group_by rowwise ungroup arrange summarise n_distinct mutate rename select
+#' @importFrom magrittr %>%
 #' @return
-#' @export
 #'
 #'
 #' @examples
@@ -17,18 +17,14 @@
 #' bci %>%
 #' ivi(sp = "species", ab = "area_basal", group = "sub_plot")
 
-ivi_index <- function(df, sp = "species", ab = "area_basal", group = "sub_plot"){
-  df1 <- df %>%
-    dplyr::select(group, sp, ab) %>%
-    dplyr::rename("splot" = group,
-                  "species" = sp,
-                  "area_basal" = ab)
-
-  output <- df1 %>%
-    dplyr::group_by(species) %>%
+ivi_index <- function(df, group, sp , ab){
+  df %>%
+    dplyr::select({{group}}, {{sp}}, {{ab}}) %>%
+    dplyr::group_by({{sp}}) %>%
     dplyr::summarise(abundance = n(),
-                     n_splot = dplyr::n_distinct(splot),
-                     area_basal = sum(area_basal, na.rm = TRUE)) %>%
+                     n_splot = dplyr::n_distinct({{group}}),
+                     area_basal = sum({{ab}}, na.rm = TRUE)) %>%
+    dplyr::ungroup() %>%
     dplyr::mutate(dens_rela = (abundance/sum(abundance, na.rm = TRUE))*100,
                   freq_rela = (n_splot/ sum(n_splot, na.rm = TRUE))*100,
                   dom_rela = (area_basal/sum(area_basal, na.rm = TRUE))*100) %>%
@@ -37,6 +33,4 @@ ivi_index <- function(df, sp = "species", ab = "area_basal", group = "sub_plot")
     dplyr::arrange(desc(ivi)) %>%
 
     dplyr::ungroup()
-
-  return(output)
 }

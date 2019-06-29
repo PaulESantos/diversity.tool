@@ -15,6 +15,9 @@ ivi_index(df, sp = "species", ab = "area_basal", group = "sub_plot")
 
 \item{group}{Name of the variable for the minimum unit sample.}
 }
+\value{
+
+}
 \description{
 ivi : Importance Valor Index
 }
