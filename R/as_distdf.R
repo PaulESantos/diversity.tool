@@ -15,7 +15,7 @@
 #' @param type select the output structure: "wide", for square data_frame; "long", for tidy data_frame.
 #' @return a tibble object.
 #'
-#' @export
+#' @export as_distdf
 #'
 #'
 #' @importFrom tidyr gather

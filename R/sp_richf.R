@@ -6,6 +6,8 @@
 #'
 #' @return
 #'
+#' @export sp_richf
+#'
 #' @importFrom tidyr gather
 #' @importFrom tibble has_rownames
 #' @importFrom dplyr filter as_tibble  summarise group_by ungroup n_distinct desc arrange

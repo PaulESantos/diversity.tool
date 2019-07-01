@@ -8,8 +8,10 @@
 #'
 #' @importFrom dplyr group_by rowwise ungroup arrange summarise n_distinct mutate rename select
 #' @importFrom magrittr %>%
+#'
 #' @return
 #'
+#' @export ivi_index
 #'
 #' @examples
 #' require(diversity.tool)

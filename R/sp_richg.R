@@ -7,6 +7,8 @@
 #'
 #' @return
 #'
+#' @export sp_richg
+#'
 #' @importFrom dplyr as_tibble left_join rename group_by filter n_distinct summarise
 #'
 #' @importFrom tibble has_rownames

@@ -4,6 +4,8 @@
 #'
 #' @param comm Community data, a matrix-like object.
 #'
+#' @export
+#'
 #' @return
 #'
 #' @importFrom tibble has_rownames

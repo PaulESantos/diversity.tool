@@ -13,6 +13,8 @@
 #'
 #' @return
 #'
+#' @export to_comm
+#'
 #' @examples
 #' df %>%
 #' to_comm(x, y, z)

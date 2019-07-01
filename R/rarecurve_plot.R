@@ -8,6 +8,8 @@
 #'
 #' @return
 #'
+#' @export rarecurve_plot
+#'
 #' @examples
 #' require(vegan)
 #' data("dune")
