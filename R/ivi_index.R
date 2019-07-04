@@ -17,8 +17,7 @@
 #' require(diversity.tool)
 #' data("bci")
 #' bci %>%
-#' ivi(sp = "species", ab = "area_basal", group = "sub_plot")
-
+#' ivi_index(sp = "species", ab = "area_basal", group = "sub_plot")
 ivi_index <- function(df, group, sp , ab){
   df %>%
     dplyr::select({{group}}, {{sp}}, {{ab}}) %>%
