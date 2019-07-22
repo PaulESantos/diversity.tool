@@ -17,24 +17,32 @@
 #' data("dune")
 #' dune %>%
 #' comm_to_tbl()
-comm_tbl <- function(comm){
-
-    if(class(comm) == "matrix" & tibble::has_rownames(comm) == FALSE){
-      comm %>%
-        dplyr::as_tibble(rownames = "row_name") %>%
-        tidyr::gather(species, abundance, -1) %>%
-        dplyr::rename(site = row_name)
-    }
-    else if(class(comm) == "data.frame" & tibble::has_rownames(comm) == TRUE)
-    {
-      comm %>%
-        dplyr::as_tibble(rownames = "row_name") %>%
-        tidyr::gather(species, abundance, -1) %>%
-        dplyr::rename(site = row_name)
-    }
-    else if(class(comm) == "data.frame" & tibble::has_rownames(comm) == FALSE)
-    {
-      comm %>%
-        tidyr::gather(speceis, abundance, -1)
-    }
+comm_tbl<- function (comm)
+{
+  if (class(comm) == "matrix" & tibble::has_rownames(comm) ==
+      FALSE) {
+    comm %>%
+      dplyr::as_tibble(rownames = "row_name") %>%
+      tidyr::gather(species, abundance, -1) %>%
+      dplyr::rename(site = row_name)
   }
+  # else if (class(comm) == "data.frame" & tibble::has_rownames(comm) ==
+  #           TRUE) {
+  #   comm %>% dplyr::as_tibble(rownames = "row_name") %>%
+  #    tidyr::gather(species, abundance, -1) %>%
+  #    dplyr::rename(site = row_name)
+  #}
+  else if (class(comm) == "data.frame" & tibble::has_rownames(comm) ==
+           TRUE) {
+    comm %>%
+      as_tibble() %>%
+      rownames_to_column("site") %>%
+      tidyr::gather(species, abundance, -1)
+  }
+  else if (class(comm) == "data.frame" & tibble::has_rownames(comm) ==
+           FALSE) {
+    comm %>%
+      tidyr::gather(species, abundance, -1)
+  }
+}
+
