@@ -13,13 +13,13 @@
 #'
 #' @return
 #'
-#' @export to_comm
+#' @export tbl_to_comm
 #'
 #' @examples
 #' df %>%
 #' to_comm(x, y, z)
 #'
-to_comm <- function(df, x, y, z) {
+tbl_to_comm <- function(df, x, y, z) {
 
   names <- df %>% dplyr::distinct(!!dplyr::enquo(x))
   na_col <- colnames(names)[1]
