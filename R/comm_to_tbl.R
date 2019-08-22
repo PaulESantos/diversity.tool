@@ -2,9 +2,9 @@
 #'
 #' This function converts a community data.frame to a tidy tibble object.
 #'
-#' @param comm Community data, a matrix-like object.
+#' @param comm Community data.
 #'
-#' @export
+#' @export comm_to_tbl
 #'
 #' @return
 #'
@@ -17,7 +17,7 @@
 #' data("dune")
 #' dune %>%
 #' comm_to_tbl()
-comm_tbl<- function (comm)
+comm_to_tbl<- function (comm)
 {
   if (class(comm) == "matrix" & tibble::has_rownames(comm) ==
       FALSE) {
