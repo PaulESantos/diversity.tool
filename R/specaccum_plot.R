@@ -17,10 +17,8 @@
 #' @importFrom vegan decostand
 #' @importFrom vegan specaccum
 #' @importFrom magrittr %>%
-#' @import vegan
-#' @import tidyverse
 #'
-#' @examples
+#' @examplesr
 #'
 #' require(vegan)
 #' data(dune)

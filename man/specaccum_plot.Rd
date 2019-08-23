@@ -22,13 +22,6 @@ specaccum_plot(comm, method = "exact")
 \description{
 specaccum_plot
 }
-\examples{
-
-require(vegan)
-data(dune)
-specaccumplot(dune)
-
-}
 \seealso{
 [specaccum()] from vegan.
 }
