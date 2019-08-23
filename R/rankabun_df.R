@@ -12,8 +12,10 @@
 #'
 #' @export
 #'
-#' @import tidyverse
-#' @import tidyr
+#'
+#' @importFrom dplyr as_tibble mutate filter group_by summarise ungroup arrange
+#' @importFrom tidyr gather
+#' @importFrom magrittr %>%
 #'
 #' @examples
 #'

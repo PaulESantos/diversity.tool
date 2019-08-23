@@ -9,10 +9,10 @@
 #' @param name
 #'
 #'
-#' @importFrom  purrr map map_df
+#' @importFrom purrr map map_df
 #' @importFrom janitor clean_names
 #' @importFrom dplyr ungroup as_tibble transmute select select_if
-#' @import magrittr
+#' @importFrom magrittr %>%
 #'
 #' @return
 #' @export add_total

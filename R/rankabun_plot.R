@@ -5,9 +5,9 @@
 #'
 #' @return A ggplot object.
 #'
-#' @export
+#' @export rankabund_plot
 #'
-#' @import tidyverse
+#' @importFrom ggplot2 ggplot annotate geom_line theme element_text element_rect geom_point labs aes element_line rel
 #'
 #' @examples
 #' require(vegan)
