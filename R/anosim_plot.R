@@ -10,6 +10,7 @@
 #' @export anosim_plot
 #' @importFrom dplyr tibble
 #' @importFrom ggplot2 ggplot aes geom_jitter geom_boxplot theme_bw theme labs element_text
+#' @importFrom ggbeeswarm geom_quasirandom
 #'
 #' @examples
 #' library(vegan)
@@ -25,7 +26,7 @@ anosim_plot <- function(comm) {
 
  df %>%
     ggplot2::ggplot(ggplot2::aes(x, y))+
-    ggplot2::geom_jitter(colour = "gray", size = 2)+
+    ggbeeswarm::geom_quasirandom(colour = "gray", size = 2)+
     ggplot2::geom_boxplot(fill = "transparent")+
     ggplot2::labs(subtitle = paste("R = ", round(unlist(comm[5]), 3),
                           "    ", "P = ", round(unlist(comm[2]), 3)),
