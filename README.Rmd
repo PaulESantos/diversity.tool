@@ -38,9 +38,56 @@ devtools::install_github("PaulESantos/diversity.tool")
 
 This is a basic example which shows you how to solve a common problem:
 
+- Transform community matrix to tibble:
+
 ```{r example}
-#library(diversity.tool)
-## basic example code
+library(diversity.tool)
+library(vegan)
+data("dune")
+dune_tbl <- dune %>% comm_to_tbl()
+dune_tbl
+```
+
+- Or build a community matrix from a tibble:
+
+```{r example_1}
+dune_comm <- dune_tbl %>% 
+  tbl_to_comm(site, species, abundance)
+dune_comm[1:6, 1:6]
+```
+
+- IVI index
+
+```{r ivi}
+
+data("bci")
+
+bci %>% 
+  ivi_index(sub_plot, species, area_basal)
+
+```
+
+
+- Rank-abundance calculation:
+
+  + All sample units as one community
+```{r rankabun}
+dune %>% 
+  rankabund()
+```
+  
+  + Each sample units as a different community
+
+```{r rankabun1}
+dune %>% 
+  rankabund(group = "site")
+```
+
+  +Rank-abundance plot
+
+```{r rankabun_plot}
+dune %>% 
+  rankabund_plot()
 ```
 
 ## Citation
