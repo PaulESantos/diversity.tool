@@ -6,15 +6,15 @@
 #'
 #' @details color "int" display the intinsity based on species abundance, and "id" display unique colour for each site.
 #'
-#' @return
+#' @return a ggplot2 object
 #'
-#' @export rarecurve_plot
+#' @export
 #'
 #' @examples
-#' require(vegan)
 #' data("dune")
 #' rarecurve_plot(dune)
-#' rarecurve_plot(dune, facet.var = "sites")
+#' rarecurve_plot(dune, color = "id")
+#' rarecurve_plot(dune, color = "int")
 #'
 rarecurve_plot <- function (comm, color = "int" )
 {
@@ -71,7 +71,7 @@ rarecurve_plot <- function (comm, color = "int" )
                                                       max(output$species),
                                                       2)) +
              ggplot2::theme(legend.position = "none",
-                            panel.grid = element_blank())+
+                            panel.grid = ggplot2::element_blank())+
              ggplot2::geom_text(data = last_point,
                                 aes(size+.2, species,
                                     label = sites1,
@@ -93,7 +93,7 @@ rarecurve_plot <- function (comm, color = "int" )
                                                       max(output$species),
                                                       2)) +
              ggplot2::theme(legend.position = "none",
-                            panel.grid = element_blank())+
+                            panel.grid = ggplot2::element_blank())+
              ggplot2::geom_text(data = last_point,
                                 aes(size+.2, species,
                                     label = sites1,

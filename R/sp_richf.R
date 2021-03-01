@@ -1,18 +1,20 @@
 #'  Species Richness
 #'
 #' @description Finds the number of species, by community and for each site. Also frequencies of species.
-#'
+#' @param comm community matrix
 #' @param method "comm" number of unique species, "site" number of species by site, "freq" number of sites where the species are present.
 #'
-#' @return
+#' @return a tibble
 #'
-#' @export sp_richf
+#' @export
 #'
 #' @importFrom tidyr gather
 #' @importFrom tibble has_rownames
 #' @importFrom dplyr filter as_tibble  summarise group_by ungroup n_distinct desc arrange
 #'
 #' @examples
+#' library(vegan)
+#' data("BCI")
 #' sp_richf(dune, method = "comm")
 #' sp_richf(dune, method = "site")
 #' sp_richf(dune, method = "freq")

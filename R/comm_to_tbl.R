@@ -2,47 +2,64 @@
 #'
 #' This function converts a community data.frame to a tidy tibble object.
 #'
-#' @param comm Community data.
+#' @param comm Community data
+#' @param drop drop values equal to 0
 #'
-#' @export comm_to_tbl
+#' @export
 #'
-#' @return
-#'
-#' @importFrom tibble has_rownames
-#' @importFrom tidyr gather
-#' @importFrom dplyr as_tibble rename
-#' @importFrom magrittr %>%
+#' @return a tibble
 #' @examples
 #' require(vegan)
 #' data("dune")
 #' dune %>%
 #' comm_to_tbl()
-comm_to_tbl<- function (comm)
+comm_to_tbl<- function (comm, drop = TRUE)
 {
   if (class(comm) == "matrix" & tibble::has_rownames(comm) ==
       FALSE) {
-    comm %>%
-      dplyr::as_tibble(rownames = "row_name") %>%
-      tidyr::gather(species, abundance, -1) %>%
-      dplyr::rename(site = row_name)
+    out <- comm %>%
+      dplyr::as_tibble(rownames = "site") %>%
+      tidyr::pivot_longer(-site,
+                          names_to = "species",
+                          values_to = "abundance")
+    if(drop == TRUE){
+      out %>%
+        dplyr::filter(abundance != 0)
+    }
+    else{
+      out
+    }
   }
-  # else if (class(comm) == "data.frame" & tibble::has_rownames(comm) ==
-  #           TRUE) {
-  #   comm %>% dplyr::as_tibble(rownames = "row_name") %>%
-  #    tidyr::gather(species, abundance, -1) %>%
-  #    dplyr::rename(site = row_name)
-  #}
+
   else if (class(comm) == "data.frame" & tibble::has_rownames(comm) ==
            TRUE) {
-    comm %>%
-      as_tibble() %>%
-      rownames_to_column("site") %>%
-      tidyr::gather(species, abundance, -1)
+    out <- comm %>%
+      dplyr::as_tibble() %>%
+      tibble::rownames_to_column("site") %>%
+      tidyr::pivot_longer(-site,
+                          names_to = "species",
+                          values_to = "abundance")
+    if(drop == TRUE){
+      out %>%
+        dplyr::filter(abundance != 0)
+    }
+    else{
+      out
+    }
   }
   else if (class(comm) == "data.frame" & tibble::has_rownames(comm) ==
            FALSE) {
-    comm %>%
-      tidyr::gather(species, abundance, -1)
+    out <- comm %>%
+    tidyr::pivot_longer(-1,
+                        names_to = "species",
+                        values_to = "abundance")
+    if(drop == TRUE){
+      out %>%
+        dplyr::filter(abundance != 0)
+    }
+    else{
+      out
+    }
   }
 }
 

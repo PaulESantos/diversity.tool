@@ -12,7 +12,7 @@ rarecurve_plot(comm, color = "int")
 \item{color}{Options  "int" and "id".}
 }
 \value{
-
+a ggplot2 object
 }
 \description{
 Function rarecurve_plot draws a rarefaction curve for each row of the input data.
@@ -21,9 +21,9 @@ Function rarecurve_plot draws a rarefaction curve for each row of the input data
 color "int" display the intinsity based on species abundance, and "id" display unique colour for each site.
 }
 \examples{
-require(vegan)
 data("dune")
 rarecurve_plot(dune)
-rarecurve_plot(dune, facet.var = "sites")
+rarecurve_plot(dune, color = "id")
+rarecurve_plot(dune, color = "int")
 
 }

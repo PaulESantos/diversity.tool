@@ -23,10 +23,10 @@ rankabund_plot <- function(comm, method = "abundance") {
   method <- match.arg(method, SPLIT)
 
 
-  df <-  rankabund_df(comm)
+  df <-  diversity.tool::rankabund(comm)
 
   themes <- ggplot2::theme(
-    text = ggplot2::element_text(face = "bold", size = 15),
+    text = ggplot2::element_text(face = "bold", size = 12),
     panel.background = ggplot2::element_rect(fill = "white", colour = NA),
     panel.border = ggplot2::element_rect(fill = NA, colour = "grey20"),
     panel.grid = ggplot2::element_line(colour = "grey92"),
@@ -61,7 +61,14 @@ rankabund_plot <- function(comm, method = "abundance") {
              ggplot2::geom_line(color = "grey", size = 1.2)+
              ggplot2::geom_point( size = 2, color = "red")+
              ggplot2::labs(x = "Abundance Rank",
-                           y = "Log10(Abundance)")+
+                           y = "Log10(Abundance)") +
+             ggplot2::annotate(
+               "text",
+               x = as.vector(df$rank[1:5]),
+               y = as.vector(df$logabun[1:5]),
+               label = as.vector(df$species[1:5]),
+               hjust = -.2
+             )+
              themes
     )
   }

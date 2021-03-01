@@ -4,13 +4,15 @@
 \alias{comm_to_tbl}
 \title{Community data.frame to tibble.}
 \usage{
-comm_to_tbl(comm)
+comm_to_tbl(comm, drop = TRUE)
 }
 \arguments{
-\item{comm}{Community data.}
+\item{comm}{Community data}
+
+\item{drop}{drop values equal to 0}
 }
 \value{
-
+a tibble
 }
 \description{
 This function converts a community data.frame to a tidy tibble object.

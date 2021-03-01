@@ -4,19 +4,19 @@
 \alias{ivi_index}
 \title{ivi : Importance Valor Index}
 \usage{
-ivi_index(df, group, sp, ab)
+ivi_index(df, sample_unit, taxon, basal_area)
 }
 \arguments{
 \item{df}{A data_frame, with the information for each tree in the census.}
 
-\item{group}{Name of the variable for the minimum unit sample.}
+\item{sample_unit}{Name of the variable for the minimum unit sample.}
 
-\item{sp}{Name of the variable (column)that contein species name.}
+\item{taxon}{Name of the variable (column) that contein species name.}
 
-\item{ab}{Name of the variable (column) that contein basal area.}
+\item{basal_area}{Name of the variable (column) that contein basal area.}
 }
 \value{
-
+a tibble
 }
 \description{
 ivi : Importance Valor Index
@@ -25,5 +25,6 @@ ivi : Importance Valor Index
 require(diversity.tool)
 data("bci")
 bci \%>\%
-ivi_index(sp = "species", ab = "area_basal", group = "sub_plot")
+ivi_index(sub_plot, species, area_basal)
+
 }

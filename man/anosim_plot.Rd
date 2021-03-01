@@ -4,7 +4,7 @@
 \alias{anosim_plot}
 \title{ANOSIM plot}
 \usage{
-anosim_plot(anosim_object)
+anosim_plot(comm)
 }
 \arguments{
 \item{comm}{anosim object}

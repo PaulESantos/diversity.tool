@@ -8,9 +8,9 @@
 #'  richness, and "rarefaction" finds the mean when accumulating
 #'  individuals instead of sites. Except for "collector" method.
 #'
-#' @return
+#' @return a ggplot2 object
 #'
-#' @export specaccum_plot
+#' @export
 #'
 #' @seealso [specaccum()] from vegan.
 #'
@@ -18,21 +18,20 @@
 #' @importFrom vegan specaccum
 #' @importFrom magrittr %>%
 #'
-#' @examplesr
-#'
-#' require(vegan)
-#' data(dune)
-#' specaccumplot(dune)
+#' @examples
+#' data("dune")
+#' specaccum_plot(dune)
 #'
 specaccum_plot <- function(comm, method = "exact") {
 
   df <- vegan::specaccum(comm, method = method)
-dplyr::data_frame(parcela = df$sites,
+dplyr::tibble(parcela = df$sites,
                     riqueza = df$richness,
                     des_sta = df$sd) %>%
   ggplot2::ggplot(ggplot2::aes(parcela, riqueza))+
   ggplot2::geom_line(linetype = 1, size = .5, color = "red") +
-  ggplot2::geom_errorbar(ggplot2::aes(ymin = riqueza - des_sta, ymax = riqueza + des_sta),
+  ggplot2::geom_errorbar(ggplot2::aes(ymin = riqueza - des_sta,
+                                      ymax = riqueza + des_sta),
                 width = 0, size = 1)+
   ggplot2::geom_point(color = "red", size = 1.5)+
   ggplot2::theme_bw()+

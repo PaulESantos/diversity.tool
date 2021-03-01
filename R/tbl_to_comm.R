@@ -1,39 +1,34 @@
 #' Tibble to community data.frame
 #'
 #' @param df tibble for community richnes data
-#' @param x variable for group species (site, plot).
-#' @param y species column name.
-#' @param z richnes species column.
+#' @param site variable for group species (site, plot).
+#' @param taxon species column name.
+#' @param abun richnes species column.
 #'
 #'
-#' @importFrom dplyr distinct enquo select left_join mutate_all
+#' @importFrom dplyr distinct select left_join
 #' @importFrom tidyr spread replace_na
 #' @importFrom purrr as_vector
-#' @importFrom magrittr %>%
 #'
-#' @return
+#' @return a community matrix
 #'
-#' @export tbl_to_comm
+#' @export
 #'
 #' @examples
-#' df %>%
-#' to_comm(x, y, z)
-#'
-tbl_to_comm <- function(df, x, y, z) {
+tbl_to_comm <- function(df, site, taxon, abun) {
 
-  names <- df %>% dplyr::distinct(!!dplyr::enquo(x))
+  names <- df %>% dplyr::distinct({{site}})
   na_col <- colnames(names)[1]
   df <- df %>%
-    dplyr::select(!!dplyr::enquo(x),
-                  !!dplyr::enquo(y),
-                  !!dplyr::enquo(z) ) %>%
-    tidyr::spread(!!dplyr::enquo(y),
-                  !!dplyr::enquo(z))
-
+    dplyr::select({{site}},
+                  {{taxon}},
+                  {{abun}}) %>%
+    tidyr::pivot_wider(names_from = {{taxon}},
+                       values_from = {{abun}},
+                       values_fill = 0)
   df <- names %>%
     dplyr::left_join(df, by = na_col[1]) %>%
     dplyr::select(-1) %>%
-    dplyr::mutate_all(list(~tidyr::replace_na(., 0))) %>%
     as.data.frame()
 
   row.names(df) <- purrr::as_vector(names)

@@ -1,11 +1,29 @@
 Package: diversity.tool
-Title: Tools for biodiversity analysis.
-Version: 0.0.1.1
-Authors@R: person("Paul Efren", "Santos Andrade", email = "paulefrens@gmail.com", role = c("aut", "cre"))
-Description: Functions for community data analysis.
-URL: https://github.com/PaulESantos/diversity.tool
-Depends: R (>= 3.5.1)
+Title: Tools for biodiversity data manipulation
+Version: 0.0.0.1
+Authors@R: 
+    person(given = "Paul Efren",
+           family = "Santos Andrade",
+           role = c("aut", "cre"),
+           email = "paulefrens@gmail.com",
+           comment = c(ORCID = "0000-0002-6635-0375"))
+Description: What the package does (one paragraph).
+Date: 2021
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.1.1.9000
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Depends: 
+    R (>= 3.5.0),
+Imports: 
+    dplyr,
+    ggplot2,
+    purrr,
+    tibble,
+    tidyr,
+    vegan,
+    magrittr,
+    betapart,
+    reshape2,
+    fossil

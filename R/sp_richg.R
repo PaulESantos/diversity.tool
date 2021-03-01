@@ -1,20 +1,20 @@
 #' Richness and frequency by treatment.
 #' @description The function returns a tibble: "n_plot" the frequency of grouped variable. "n_species" species richness of the grouped variable.
 #'
-#' @param comm1 community data matrix.
+#' @param comm community data matrix.
 #' @param char characteristic from the community.
 #' @param factor name of the variable used for build a grouped community data.
 #'
-#' @return
+#' @return a tibble
 #'
-#' @export sp_richg
+#' @export
 #'
 #' @importFrom dplyr as_tibble left_join rename group_by filter n_distinct summarise
 #' @importFrom tibble has_rownames
 #' @importFrom tidyr gather
 #' @importFrom tibble rownames_to_column as_tibble
 #' @examples
-#' require(dune)
+#' library(vegan)
 #' data("dune")
 #' data("dune.env")
 #' sp_richg(dune, dune.env, factor = "Management")

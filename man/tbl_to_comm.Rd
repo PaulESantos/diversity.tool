@@ -4,25 +4,20 @@
 \alias{tbl_to_comm}
 \title{Tibble to community data.frame}
 \usage{
-tbl_to_comm(df, x, y, z)
+tbl_to_comm(df, site, taxon, abun)
 }
 \arguments{
 \item{df}{tibble for community richnes data}
 
-\item{x}{variable for group species (site, plot).}
+\item{site}{variable for group species (site, plot).}
 
-\item{y}{species column name.}
+\item{taxon}{species column name.}
 
-\item{z}{richnes species column.}
+\item{abun}{richnes species column.}
 }
 \value{
-
+a community matrix
 }
 \description{
 Tibble to community data.frame
-}
-\examples{
-df \%>\%
-to_comm(x, y, z)
-
 }

@@ -7,9 +7,10 @@
 #' to a tibble object.
 #'
 #' @param x dist object
+#' @param diagonal Set as NA character by default
 #'
 #' @return tibble
-#' @export as_distbl
+#' @export
 #'
 #' @importFrom dplyr as_tibble bind_cols
 #' @importFrom tibble tibble
@@ -30,13 +31,13 @@
 #'
 as_distbl <- function (x, diagonal = NA){
   x <- x %>%
-    as.matrix() %>%
-    dplyr::as_tibble()
+    as.matrix()
 
   diag(x) <- diagonal
 
-  rowname <- tibble::tibble(rowname = colnames(x))
 
-  x <- dplyr::bind_cols(rowname, x)
-  x
+  rowname<- tibble::tibble(comm = colnames(x))
+
+  dplyr::bind_cols(rowname, dplyr::as_tibble(x))
+
 }

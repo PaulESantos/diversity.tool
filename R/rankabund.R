@@ -4,32 +4,25 @@
 #'
 #' @param comm Community data.
 #' @param group Index for changing the output:
-#'  "none" the default output.
-#'  "sites" the rank abundance indexes are
-#'          estimated for each row (plot, site).
+#'                "none" the default output.
+#'                "sites" the rank abundance indexes are estimated for each row (plot, site).
 #'
-#' @return
+#' @return a tibble
 #'
 #' @export
-#'
-#'
-#' @importFrom dplyr as_tibble mutate filter group_by summarise ungroup arrange
-#' @importFrom tidyr gather
-#' @importFrom magrittr %>%
 #'
 #' @examples
 #'
 #' require(vegan)
 #' data(dune)
-#' rankabun_df(dune)
-#' rankabun_df(dune, group = "sites")
+#' rankabund(dune)
+#' rankabund(dune, group = "sites")
 #'
 #' require(fossil)
 #' data("fdata.mat")
-#' rankabun_df(t(fdata.mat))
-#' rankabun_df(t(fdata.mat), group = "sites")
-
-rankabund_df <- function(comm, group = "none"){
+#' rankabund(t(fdata.mat))
+#' rankabund(t(fdata.mat), group = "sites")
+rankabund <- function(comm, group = "none"){
 
   SPLIT <- c("none", "sites")
   if (is.na(pmatch(group, SPLIT)) | pmatch(group,
@@ -47,7 +40,8 @@ rankabund_df <- function(comm, group = "none"){
 
   output <- df %>%
     dplyr::group_by(species) %>%
-    dplyr::summarise(abun = sum(abundance)) %>%
+    dplyr::summarise(abun = sum(abundance),
+                     .groups = "drop") %>%
     dplyr::arrange(desc(abun)) %>%
     dplyr::mutate(
       rank = seq(1, length(species)),

@@ -7,15 +7,19 @@
 sp_richf(comm, method = "comm")
 }
 \arguments{
+\item{comm}{community matrix}
+
 \item{method}{"comm" number of unique species, "site" number of species by site, "freq" number of sites where the species are present.}
 }
 \value{
-
+a tibble
 }
 \description{
 Finds the number of species, by community and for each site. Also frequencies of species.
 }
 \examples{
+library(vegan)
+data("BCI")
 sp_richf(dune, method = "comm")
 sp_richf(dune, method = "site")
 sp_richf(dune, method = "freq")

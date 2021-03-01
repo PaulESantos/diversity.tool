@@ -10,18 +10,23 @@ specaccum_plot(comm, method = "exact")
 \item{comm}{Community data frame.}
 
 \item{method}{Species accumulation method (partial match).
- Use the same options as specaccum function from vegan package,
+Use the same options as specaccum function from vegan package,
 "random" adds sites in random order, "exact" finds the
- expected (mean) species richness, "coleman" finds the expected
- richness, and "rarefaction" finds the mean when accumulating
- individuals instead of sites. Except for "collector" method.}
+expected (mean) species richness, "coleman" finds the expected
+richness, and "rarefaction" finds the mean when accumulating
+individuals instead of sites. Except for "collector" method.}
 }
 \value{
-
+a ggplot2 object
 }
 \description{
 specaccum_plot
 }
+\examples{
+data("dune")
+specaccum_plot(dune)
+
+}
 \seealso{
-[specaccum()] from vegan.
+\code{\link[=specaccum]{specaccum()}} from vegan.
 }

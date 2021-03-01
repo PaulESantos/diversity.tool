@@ -5,14 +5,11 @@
 #' @param basal_area Name of the variable (column) that contein basal area.
 #' @param sample_unit Name of the variable for the minimum unit sample.
 #'
-#' @usage ivi(df, sample_unit, taxon, basal_area)
 #'
 #' @importFrom dplyr group_by rowwise ungroup arrange summarise n_distinct mutate rename select
-#' @importFrom magrittr %>%
+#' @return a tibble
 #'
-#' @return
-#'
-#' @export ivi_index
+#' @export
 #'
 #' @examples
 #' require(diversity.tool)
@@ -24,8 +21,8 @@ ivi_index <- function(df, sample_unit, taxon, basal_area) {
 
   df %>%
     dplyr::select({{sample_unit}}, {{taxon}}, {{basal_area}}) %>%
-    dplyr::group_by({{species}}) %>%
-    dplyr::summarise(abundance = n(),
+    dplyr::group_by({{taxon}}) %>%
+    dplyr::summarise(abundance = dplyr::n(),
                      n_splot = dplyr::n_distinct({{sample_unit}}),
                      area_basal = sum({{basal_area}}, na.rm = TRUE)) %>%
     dplyr::ungroup() %>%
