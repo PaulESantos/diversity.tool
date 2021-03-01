@@ -1,2 +1,6 @@
-^diversity\.Rproj$
+^diversity.tool\.Rproj$
 ^\.Rproj\.user$
+^LICENSE\.md$
+com_df.R
+birf_count.RData
+^README\.Rmd$

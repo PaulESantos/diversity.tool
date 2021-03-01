@@ -76,7 +76,7 @@ dune %>%
   rankabund()
 ```
   
-  + Each sample units as a different community
+   + Each sample units as a different community
 
 ```{r rankabun1}
 dune %>% 
@@ -89,6 +89,32 @@ dune %>%
 dune %>% 
   rankabund_plot()
 ```
+
+- Transform a `dist` matrix to tibble:
+
+```{r distbl}
+
+dune_dist <- vegdist(dune[1:10, 1:10])
+
+dune_dist
+
+
+dune_dist_tbl <- dune_dist %>% 
+  as_distbl()
+
+dune_dist_tbl
+```
+
+- Transform to long format:
+
+```{r longtbl}
+
+dune_dist_tbl %>% 
+  long_distbl()
+
+```
+
+
 
 ## Citation
 
