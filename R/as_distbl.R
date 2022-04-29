@@ -10,27 +10,12 @@
 #' @param diagonal Set as NA character by default
 #'
 #' @return tibble
-#' @export
+#' @keywords internal
 #'
 #' @importFrom dplyr as_tibble bind_cols
 #' @importFrom tibble tibble
-#' @examples
-#' require(vegan)
-#'
-#' data("dune")
-#'
-#' vegdist(dune) %>%
-#' as_distbl()
-#'
-#' require(betapart)
-#'
-#' beta <- beta.pair.abund(dune)
-#'
-#' beta$beta.bray.bal %>%
-#' as_distbl()
-#'
 as_distbl <- function (x, diagonal = NA){
-  x <- x %>%
+  x <- x |>
     as.matrix()
 
   diag(x) <- diagonal

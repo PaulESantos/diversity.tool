@@ -35,7 +35,7 @@ rankabund_plot <- function(comm, method = "abundance") {
   )
 
 
-  output <- df %>%
+  output <- df |>
     ggplot2::ggplot(ggplot2::aes(rank, abun)) +
     ggplot2::geom_line(color = "grey", size = 1.2) +
     ggplot2::geom_point(size = 2, color = "red") +
@@ -56,7 +56,7 @@ rankabund_plot <- function(comm, method = "abundance") {
   else if
   (method == "logabun")
   {
-    return(df %>%
+    return(df |>
              ggplot2::ggplot(ggplot2::aes(rank, logabun))+
              ggplot2::geom_line(color = "grey", size = 1.2)+
              ggplot2::geom_point( size = 2, color = "red")+
@@ -75,7 +75,7 @@ rankabund_plot <- function(comm, method = "abundance") {
   else
     (method == "rel.abund")
   {
-    return(df %>%
+    return(df |>
              ggplot2::ggplot(ggplot2::aes(rank, rel.abund))+
              ggplot2::geom_line(color = "grey", size = 1.2)+
              ggplot2::geom_point( size = 2, color = "red")+

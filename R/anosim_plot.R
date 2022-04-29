@@ -7,26 +7,16 @@
 #' @param comm anosim object
 #'
 #' @return ggplot2
-#' @export
 #' @importFrom dplyr tibble
 #' @importFrom ggplot2 ggplot aes geom_jitter geom_boxplot theme_bw theme labs element_text
-#'
-#' @examples
-#' library(vegan)
-#' data(dune)
-#' data(dune.env)
-#' dune.dist <- vegdist(dune)
-#' dune.ano <- with(dune.env, anosim(dune.dist, Management))
-#' summary(dune.ano)
-#' plot(dune.ano)
-#' anosim_plot(dune.ano)
+#' @keywords internal
 anosim_plot <- function(comm) {
-  df <- dplyr::tibble(x = comm[6] %>%
+  df <- dplyr::tibble(x = comm[6]  |>
                         unlist(),
-                      y = comm[7] %>%
+                      y = comm[7] |>
                         unlist())
 
- df %>%
+ df |>
     ggplot2::ggplot(ggplot2::aes(x, y))+
     ggplot2::geom_boxplot(fill = "transparent")+
     ggplot2::labs(subtitle = paste("R = ", round(unlist(comm[5]), 3),

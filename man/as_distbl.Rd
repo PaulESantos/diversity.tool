@@ -21,19 +21,4 @@ for ecological diversity measurings. for instance:
 stats:: dist(), vegan:: vegdist(), betapart::beta.pair()...)
 to a tibble object.
 }
-\examples{
-require(vegan)
-
-data("dune")
-
-vegdist(dune) \%>\%
-as_distbl()
-
-require(betapart)
-
-beta <- beta.pair.abund(dune)
-
-beta$beta.bray.bal \%>\%
-as_distbl()
-
-}
+\keyword{internal}

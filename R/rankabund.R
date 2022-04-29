@@ -17,11 +17,6 @@
 #' data(dune)
 #' rankabund(dune)
 #' rankabund(dune, group = "sites")
-#'
-#' require(fossil)
-#' data("fdata.mat")
-#' rankabund(t(fdata.mat))
-#' rankabund(t(fdata.mat), group = "sites")
 rankabund <- function(comm, group = "none"){
 
   SPLIT <- c("none", "sites")
@@ -32,23 +27,23 @@ rankabund <- function(comm, group = "none"){
 
   name <- rownames(comm)
   #all communities
-  df <- comm %>%
-    dplyr::as_tibble() %>%
-    dplyr::mutate(sites = name) %>%
+  df <- comm|>
+    dplyr::as_tibble()|>
+    dplyr::mutate(sites = name)|>
     tidyr::gather(species, abundance, -sites)
 
 
-  output <- df %>%
-    dplyr::group_by(species) %>%
+  output <- df|>
+    dplyr::group_by(species)|>
     dplyr::summarise(abun = sum(abundance),
-                     .groups = "drop") %>%
-    dplyr::arrange(desc(abun)) %>%
+                     .groups = "drop")|>
+    dplyr::arrange(desc(abun))|>
     dplyr::mutate(
       rank = seq(1, length(species)),
       proportion = (abun / sum(abun)) * 100,
       acumfreq = cumsum(proportion),
       logabun = log10(abun),
-      rel.abund = abun/sum(abun)) %>%
+      rel.abund = abun/sum(abun))|>
     dplyr::ungroup()
 
 
@@ -58,17 +53,17 @@ rankabund <- function(comm, group = "none"){
   }
   else(group == "sites")
   {
-    return(df %>%
-             dplyr::group_by(sites) %>%
-             dplyr::arrange(desc(abundance)) %>%
+    return(df|>
+             dplyr::group_by(sites)|>
+             dplyr::arrange(desc(abundance))|>
              dplyr::mutate(
                rank = seq(1, length(sites)),
                proportion = (abundance / sum(abundance)) * 100,
                acumfreq = cumsum(proportion),
                logabun = log10(abundance),
-               rel.abund = abundance / sum(abundance)) %>%
-             dplyr::filter(proportion != 0) %>%
-             dplyr::arrange(sites)) %>%
+               rel.abund = abundance / sum(abundance))|>
+             dplyr::filter(proportion != 0)|>
+             dplyr::arrange(sites))|>
       dplyr::ungroup()
   }
 }

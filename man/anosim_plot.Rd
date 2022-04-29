@@ -15,13 +15,4 @@ ggplot2
 \description{
 Analysis of similarities (ANOSIM) provides a way to test statistically whether there is a significant difference between two or more groups of sampling units.
 }
-\examples{
-library(vegan)
-data(dune)
-data(dune.env)
-dune.dist <- vegdist(dune)
-dune.ano <- with(dune.env, anosim(dune.dist, Management))
-summary(dune.ano)
-plot(dune.ano)
-anosim_plot(dune.ano)
-}
+\keyword{internal}

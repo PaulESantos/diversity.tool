@@ -16,7 +16,6 @@
 #'
 #' @importFrom vegan decostand
 #' @importFrom vegan specaccum
-#' @importFrom magrittr %>%
 #'
 #' @examples
 #' data("dune")
@@ -27,7 +26,7 @@ specaccum_plot <- function(comm, method = "exact") {
   df <- vegan::specaccum(comm, method = method)
 dplyr::tibble(parcela = df$sites,
                     riqueza = df$richness,
-                    des_sta = df$sd) %>%
+                    des_sta = df$sd) |>
   ggplot2::ggplot(ggplot2::aes(parcela, riqueza))+
   ggplot2::geom_line(linetype = 1, size = .5, color = "red") +
   ggplot2::geom_errorbar(ggplot2::aes(ymin = riqueza - des_sta,

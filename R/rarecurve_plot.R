@@ -48,22 +48,22 @@ rarecurve_plot <- function (comm, color = "int" )
   }
   dat <- rare(comm)
   dat
-  output <- dat %>%
-    reshape2::melt() %>%
-    dplyr::as_tibble() %>%
-    dplyr::rename(species = "value", sites = "L1") %>%
-    dplyr::mutate(sites1 = as.character(sites)) %>%
-    dplyr::group_by(sites1) %>%
+  output <- dat |>
+    reshape2::melt() |>
+    dplyr::as_tibble() |>
+    dplyr::rename(species = "value", sites = "L1") |>
+    dplyr::mutate(sites1 = as.character(sites)) |>
+    dplyr::group_by(sites1) |>
     dplyr::mutate(size = seq(1,length(sites), 1))
 
-  last_point <- output %>%
-    dplyr::slice(length(sites1)) %>%
-    dplyr::ungroup() %>%
+  last_point <- output |>
+    dplyr::slice(length(sites1)) |>
+    dplyr::ungroup() |>
     dplyr::arrange(sites)
 
 
   if (color == "int") {
-    return(output %>%
+    return(output |>
              ggplot2::ggplot(aes(size, species, colour = species)) +
              ggplot2::geom_line(aes(group = sites1), alpha = .5) +
              ggplot2::theme_bw() +
@@ -83,8 +83,8 @@ rarecurve_plot <- function (comm, color = "int" )
   }
   else (color == "id")
   {
-    return(output %>%
-             dplyr::ungroup() %>%
+    return(output |>
+             dplyr::ungroup() |>
              ggplot2::ggplot(aes(size, species,
                                  colour = sites1)) +
              ggplot2::geom_line(aes(group = sites1), alpha = .5) +

@@ -25,19 +25,19 @@
 sp_richf <- function(comm, method = "comm") {
 
   if(class(comm) == "matrix" & tibble::has_rownames(comm) == FALSE){
-    comm <- comm %>%
-      dplyr::as_tibble(rownames = "site") %>%
+    comm <- comm |>
+      dplyr::as_tibble(rownames = "site") |>
       tidyr::gather(species, abundance, -1)
   }
   else if(class(comm) == "data.frame" & tibble::has_rownames(comm) == TRUE)
   {
-    comm <- comm %>%
-      dplyr::as_tibble(rownames = "site") %>%
+    comm <- comm |>
+      dplyr::as_tibble(rownames = "site") |>
       tidyr::gather(species, abundance, -1)
   }
   else if(class(comm) == "data.frame" & tibble::has_rownames(comm) == FALSE)
   {
-    comm <- comm %>%
+    comm <- comm |>
       tidyr::gather(species, abundance, -1)
     colnames(comm)[1] <- "site"
   }
@@ -51,28 +51,28 @@ sp_richf <- function(comm, method = "comm") {
 
   if (method == "site") {
     return(
-      comm %>%
-        dplyr::filter(abundance != 0) %>%
-        dplyr::group_by(site) %>%
-        dplyr::summarise(n_species = dplyr::n_distinct(species)) %>%
-        dplyr::ungroup() %>%
+      comm |>
+        dplyr::filter(abundance != 0) |>
+        dplyr::group_by(site) |>
+        dplyr::summarise(n_species = dplyr::n_distinct(species)) |>
+        dplyr::ungroup() |>
         dplyr::arrange(dplyr::desc(n_species))
     )
   }
   else if (method == "comm")
   {
     # number of unique species
-    output <- comm %>%
+    output <- comm |>
       dplyr::summarise(n_species = dplyr::n_distinct(species))
     return(output)
   }
   else (method == "freq")
   {
-    output2 <- comm %>%
-      dplyr::filter(abundance != 0) %>%
-      dplyr::group_by(species) %>%
-      dplyr::summarise(n_site = dplyr::n_distinct(site)) %>%
-      dplyr::ungroup() %>%
+    output2 <- comm |>
+      dplyr::filter(abundance != 0) |>
+      dplyr::group_by(species) |>
+      dplyr::summarise(n_site = dplyr::n_distinct(site)) |>
+      dplyr::ungroup() |>
       dplyr::arrange(dplyr::desc(n_site))
     return(output2)
   }

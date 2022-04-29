@@ -11,19 +11,19 @@
 #' @examples
 #' require(vegan)
 #' data("dune")
-#' dune %>%
+#' dune|>
 #' comm_to_tbl()
 comm_to_tbl<- function (comm, drop = TRUE)
 {
   if (class(comm) == "matrix" & tibble::has_rownames(comm) ==
       FALSE) {
-    out <- comm %>%
-      dplyr::as_tibble(rownames = "site") %>%
+    out <- comm|>
+      dplyr::as_tibble(rownames = "site")|>
       tidyr::pivot_longer(-site,
                           names_to = "species",
                           values_to = "abundance")
     if(drop == TRUE){
-      out %>%
+      out|>
         dplyr::filter(abundance != 0)
     }
     else{
@@ -33,14 +33,14 @@ comm_to_tbl<- function (comm, drop = TRUE)
 
   else if (class(comm) == "data.frame" & tibble::has_rownames(comm) ==
            TRUE) {
-    out <- comm %>%
-      dplyr::as_tibble() %>%
-      tibble::rownames_to_column("site") %>%
+    out <- comm|>
+      dplyr::as_tibble()|>
+      tibble::rownames_to_column("site")|>
       tidyr::pivot_longer(-site,
                           names_to = "species",
                           values_to = "abundance")
     if(drop == TRUE){
-      out %>%
+      out|>
         dplyr::filter(abundance != 0)
     }
     else{
@@ -49,12 +49,12 @@ comm_to_tbl<- function (comm, drop = TRUE)
   }
   else if (class(comm) == "data.frame" & tibble::has_rownames(comm) ==
            FALSE) {
-    out <- comm %>%
+    out <- comm|>
     tidyr::pivot_longer(-1,
                         names_to = "species",
                         values_to = "abundance")
     if(drop == TRUE){
-      out %>%
+      out|>
         dplyr::filter(abundance != 0)
     }
     else{

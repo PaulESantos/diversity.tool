@@ -22,19 +22,19 @@ sp_richg <- function(comm,char, factor = "" ) {
 y <- factor
 
 if(class(comm) == "matrix" & tibble::has_rownames(comm) == FALSE){
-  comm <- comm %>%
-    dplyr::as_tibble(rownames = "plot") %>%
+  comm <- comm |>
+    dplyr::as_tibble(rownames = "plot") |>
     tidyr::gather(species, abundance, -1)
 }
 else if(class(comm) == "data.frame" & tibble::has_rownames(comm) == TRUE)
 {
-  comm <- comm %>%
-    dplyr::as_tibble(rownames = "plot") %>%
+  comm <- comm |>
+    dplyr::as_tibble(rownames = "plot") |>
     tidyr::gather(species, abundance, -1)
 }
 else if(class(comm) == "data.frame" & tibble::has_rownames(comm) == FALSE)
 {
-  comm <- comm %>%
+  comm <- comm |>
     tidyr::gather(species, abundance, -1)
   colnames(comm)[1] <- "plot"
 }
@@ -42,16 +42,16 @@ else if(class(comm) == "data.frame" & tibble::has_rownames(comm) == FALSE)
 
 
 x <- comm
-xx <- char %>%
-  tibble::rownames_to_column("plot") %>%
+xx <- char |>
+  tibble::rownames_to_column("plot") |>
   tibble::as_tibble()
 
-x1 <- xx %>%
-  dplyr::left_join(x, by = "plot") %>%
-  dplyr::rename(group = factor) %>%
-  tidyr::gather(species, richness, -c(1:6)) %>%
-  dplyr::filter(richness != 0) %>%
-  dplyr::group_by(group) %>%
+x1 <- xx |>
+  dplyr::left_join(x, by = "plot") |>
+  dplyr::rename(group = factor) |>
+  tidyr::gather(species, richness, -c(1:6)) |>
+  dplyr::filter(richness != 0) |>
+  dplyr::group_by(group) |>
   dplyr::summarise(n_plot = dplyr::n_distinct(plot),
               n_species = dplyr::n_distinct(species))
 colnames(x1) <- c(paste0(factor), "n_plot", "n_species")

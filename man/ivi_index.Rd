@@ -24,7 +24,7 @@ ivi : Importance Valor Index
 \examples{
 require(diversity.tool)
 data("bci")
-bci \%>\%
+bci |>
 ivi_index(sub_plot, species, area_basal)
 
 }

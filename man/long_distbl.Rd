@@ -19,13 +19,4 @@ tibble
 \description{
 Convert dist tibble object to long format tibble.
 }
-\examples{
-require(vegan)
-
-data("dune")
-
-vegdist(dune) \%>\%
-as_distbl() \%>\%
-long_distbl(plot, dist_index)
-
-}
+\keyword{internal}

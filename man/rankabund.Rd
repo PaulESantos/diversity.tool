@@ -25,9 +25,4 @@ require(vegan)
 data(dune)
 rankabund(dune)
 rankabund(dune, group = "sites")
-
-require(fossil)
-data("fdata.mat")
-rankabund(t(fdata.mat))
-rankabund(t(fdata.mat), group = "sites")
 }

@@ -14,21 +14,20 @@
 #'
 #' @export
 #'
-#' @examples
 tbl_to_comm <- function(df, site, taxon, abun) {
 
-  names <- df %>% dplyr::distinct({{site}})
+  names <- df |> dplyr::distinct({{site}})
   na_col <- colnames(names)[1]
-  df <- df %>%
+  df <- df |>
     dplyr::select({{site}},
                   {{taxon}},
-                  {{abun}}) %>%
+                  {{abun}}) |>
     tidyr::pivot_wider(names_from = {{taxon}},
                        values_from = {{abun}},
                        values_fill = 0)
-  df <- names %>%
-    dplyr::left_join(df, by = na_col[1]) %>%
-    dplyr::select(-1) %>%
+  df <- names |>
+    dplyr::left_join(df, by = na_col[1]) |>
+    dplyr::select(-1) |>
     as.data.frame()
 
   row.names(df) <- purrr::as_vector(names)
