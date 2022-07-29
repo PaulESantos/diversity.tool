@@ -10,19 +10,12 @@
 #' @param diagonal Set as NA character by default
 #'
 #' @return tibble
-#' @keywords internal
-#'
-#' @importFrom dplyr as_tibble bind_cols
-#' @importFrom tibble tibble
+#' @export
+#' @importFrom dplyr bind_cols
+#' @importFrom tibble tibble as_tibble
 as_distbl <- function (x, diagonal = NA){
-  x <- x |>
-    as.matrix()
-
+  x <- as.matrix(x)
   diag(x) <- diagonal
-
-
   rowname<- tibble::tibble(comm = colnames(x))
-
-  dplyr::bind_cols(rowname, dplyr::as_tibble(x))
-
+  dplyr::bind_cols(rowname, tibble::as_tibble(x))
 }

@@ -17,9 +17,3 @@ a tibble
 \description{
 This function converts a community data.frame to a tidy tibble object.
 }
-\examples{
-require(vegan)
-data("dune")
-dune|>
-comm_to_tbl()
-}

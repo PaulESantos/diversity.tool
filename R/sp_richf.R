@@ -24,18 +24,18 @@
 
 sp_richf <- function(comm, method = "comm") {
 
-  if(class(comm) == "matrix" & tibble::has_rownames(comm) == FALSE){
+  if(inherits(comm, "matrix") & tibble::has_rownames(comm) == FALSE){
     comm <- comm |>
       dplyr::as_tibble(rownames = "site") |>
       tidyr::gather(species, abundance, -1)
   }
-  else if(class(comm) == "data.frame" & tibble::has_rownames(comm) == TRUE)
+  else if(inherits(comm, "data.frame") & tibble::has_rownames(comm) == TRUE)
   {
     comm <- comm |>
       dplyr::as_tibble(rownames = "site") |>
       tidyr::gather(species, abundance, -1)
   }
-  else if(class(comm) == "data.frame" & tibble::has_rownames(comm) == FALSE)
+  else if(inherits(comm, "data.frame") & tibble::has_rownames(comm) == FALSE)
   {
     comm <- comm |>
       tidyr::gather(species, abundance, -1)

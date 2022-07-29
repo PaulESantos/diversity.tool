@@ -21,4 +21,3 @@ for ecological diversity measurings. for instance:
 stats:: dist(), vegan:: vegdist(), betapart::beta.pair()...)
 to a tibble object.
 }
-\keyword{internal}

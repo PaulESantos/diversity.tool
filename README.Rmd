@@ -31,8 +31,8 @@ The goal of diversity.tool is to ...
 You can install the development version from [GitHub](https://github.com/) with:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("PaulESantos/diversity.tool")
+# install.packages("pak")
+pak::pkg_install("PaulESantos/diversity.tool")
 ```
 ## Example
 
@@ -44,14 +44,14 @@ This is a basic example which shows you how to solve a common problem:
 library(diversity.tool)
 library(vegan)
 data("dune")
-dune_tbl <- dune %>% comm_to_tbl()
+dune_tbl <- dune |> comm_to_tbl()
 dune_tbl
 ```
 
 - Or build a community matrix from a tibble:
 
 ```{r example_1}
-dune_comm <- dune_tbl %>% 
+dune_comm <- dune_tbl |> 
   tbl_to_comm(site, species, abundance)
 dune_comm[1:6, 1:6]
 ```
@@ -62,7 +62,7 @@ dune_comm[1:6, 1:6]
 
 data("bci")
 
-bci %>% 
+bci |> 
   ivi_index(sub_plot, species, area_basal)
 
 ```
@@ -72,21 +72,21 @@ bci %>%
 
   + All sample units as one community
 ```{r rankabun}
-dune %>% 
+dune |> 
   rankabund()
 ```
   
    + Each sample units as a different community
 
 ```{r rankabun1}
-dune %>% 
+dune |> 
   rankabund(group = "site")
 ```
 
   +Rank-abundance plot
 
 ```{r rankabun_plot}
-dune %>% 
+dune |> 
   rankabund_plot()
 ```
 
@@ -99,8 +99,7 @@ dune_dist <- vegdist(dune[1:10, 1:10])
 dune_dist
 
 
-dune_dist_tbl <- dune_dist %>% 
-  as_distbl()
+dune_dist_tbl <- diversity.tool::as_distbl(dune_dist)
 
 dune_dist_tbl
 ```
@@ -109,7 +108,7 @@ dune_dist_tbl
 
 ```{r longtbl}
 
-dune_dist_tbl %>% 
+dune_dist_tbl |> 
   long_distbl()
 
 ```
